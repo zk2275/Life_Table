@@ -183,15 +183,35 @@ censored.
 
 - Survival function:
 
-$$\begin{equation}
-\chi_{\mathbb{Q}}(x)=
-    \begin{cases}
-        1 & \text{if } x \in \mathbb{Q}\\
-        0 & \text{if } x \in \mathbb{R}\setminus\mathbb{Q}
-    \end{cases}
-\end{equation}$$
+$$ \hat{S_F}(t)=\left\{
+\begin{matrix}
+     1    &  t<t_1\\
+  \prod_{t_i \le t}exp[-\frac{d_i}{n_i}] & t \ge t_1
+\end{matrix}
+\right.
+$$
+
+$$ \hat{S_K}(t)=\left\{
+\begin{matrix}
+     1    &  t<t_1\\
+  \prod_{t_i \le t}[1-\frac{d_i}{n_i}] & t \ge t_1
+\end{matrix}
+\right.
+$$
+
+$$\because exp[-\frac{d_i}{n_i}] \ge1-\frac{d_i}{n_i}$$
+
+So, Fleming-Harrington estimator can always be larger than K-M
+estimator.
 
 # Descrbe the analyses and write conclusions
+
+From the survival functions, patients in treatment group 2(rx=2)
+generally perform better than those in group 1(rx=1). Besides, the
+median survival time has suggested the same results, but nothing could
+be referred from the hazard plots. Last but not least, after comparing
+ECOG performance status in different groups, censored ones in group 2
+generally perform better than in group 1.
 
 # References
 

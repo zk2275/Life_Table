@@ -2,7 +2,7 @@
 title: "Life_Table"
 author: "Zhuodiao Kuang"
 date: "`r Sys.Date()`"
-output: pdf_document
+output: github_document
 ---
 
 
@@ -122,6 +122,8 @@ For the group 2(rx = 2), the median survival time is not sure, because over half
 
 # Compare survival function estimations between K-M and F-H methods
 
+
+
 #### Nelson-Aalen(Fleming-Harrington) and K-M estimators
 
 * Survival function:
@@ -148,6 +150,7 @@ So, Fleming-Harrington estimator can always be larger than K-M estimator.
 
 # Descrbe the analyses and write conclusions
 
+From the survival functions, patients in treatment group 2(rx=2) generally perform better than those in group 1(rx=1). Besides, the median survival time has suggested the same results, but nothing could be referred from the hazard plots. Last but not least, after comparing ECOG performance status in different groups, censored ones in group 2 generally perform better than in group 1.
 
 
 # References

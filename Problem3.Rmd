@@ -117,6 +117,8 @@ ovarian.survfit |>
 
 # Median survival time for each treatment group
 
+For the group 1(rx = 1), the median survival time is $534.5(\frac{431+638}{2})$ days.
+For the group 2(rx = 2), the median survival time is not sure, because over half of patients are still censored.
 
 # Compare survival function estimations between K-M and F-H methods
 

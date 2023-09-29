@@ -5,17 +5,37 @@ date: "`r Sys.Date()`"
 output: github_document
 ---
 
+
+
 # Load packages
 
-```{r}
+```{r , load_packages, message = FALSE,warning=FALSE}
 library(survival)
 library(tidyverse)
 library(ggfortify)
 library(dplyr)
 library(ggplot2)
 library(biostat3)
+library(knitr)
 ```
 
+```{r setup, echo = FALSE, cache = FALSE, message = FALSE}
+rm(list = ls())
+
+## Global options
+opts_chunk$set(echo      = TRUE,
+	             cache     = TRUE,
+               prompt    = FALSE,
+               tidy      = FALSE,
+               comment   = NA,
+               message   = FALSE,
+               warning   = FALSE,
+               dpi       = 150,
+               fig.width = 4, 
+               fig.asp   = 5/7,
+               fig.align = "center")
+# attr.source = '.numberLines'
+```
 
 # Ovarian Cancer:
 
@@ -27,9 +47,23 @@ library(biostat3)
 * ecog.ps: ECOG performance status(1 is better)
 
 ```{r ovarian, message=FALSE, warning=FALSE}
-
 data("ovarian")
 attach(ovarian)
+```
+
+
+# Life-table summary stratified by rx
+```{r}
+res <- summary( survfit( Surv(futime, fustat)~rx, data=ovarian))
+cols <- lapply(c(2:6, 8:11) , function(x) res[x])
+tbl <- do.call(data.frame, cols)
+tbl
+```
+
+
+# Create life-table stratified by rx
+
+```{r}
 ovarian_rx1 <- ovarian |>
   filter(rx == 1) |>
   arrange(futime)
@@ -38,13 +72,6 @@ ovarian_rx2<- ovarian |>
   filter(rx == 2)|>
   arrange(futime)
 
-ovarian_rx1
-ovarian_rx2
-```
-
-# Create life-table stratified by rx
-
-```{r}
 lifet1<-lifetab2(Surv(futime, fustat == 1)~1,ovarian_rx1)
 lifet2<-lifetab2(Surv(futime, fustat == 1)~1,ovarian_rx2)
 print(lifet1, digits = 2)
@@ -88,12 +115,10 @@ ovarian.survfit |>
   xlab("Time")
 ```
 
-# Create life-table stratified by rx
-```{r}
-res <- summary( survfit( Surv(futime, fustat)~rx, data=ovarian))
-cols <- lapply(c(2:6, 8:11) , function(x) res[x])
-tbl <- do.call(data.frame, cols)
-tbl
-```
+# Median survival time for each treatment group
+
+
+# Compare survival function estimations between K-M and F-H methods
+
 
 

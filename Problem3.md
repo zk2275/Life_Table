@@ -169,3 +169,34 @@ ovarian.survfit |>
 ```
 
 <img src="Problem3_files/figure-gfm/unnamed-chunk-5-1.png" style="display: block; margin: auto;" />
+
+# Median survival time for each treatment group
+
+For the group 1(rx = 1), the median survival time is
+$534.5(\frac{431+638}{2})$ days. For the group 2(rx = 2), the median
+survival time is not sure, because over half of patients are still
+censored.
+
+# Compare survival function estimations between K-M and F-H methods
+
+#### Nelson-Aalen(Fleming-Harrington) and K-M estimators
+
+- Survival function:
+
+$$\begin{equation}
+\chi_{\mathbb{Q}}(x)=
+    \begin{cases}
+        1 & \text{if } x \in \mathbb{Q}\\
+        0 & \text{if } x \in \mathbb{R}\setminus\mathbb{Q}
+    \end{cases}
+\end{equation}$$
+
+# Descrbe the analyses and write conclusions
+
+# References
+
+Edmonson JH, Fleming TR, Decker DG, Malkasian GD, Jorgensen EO,
+Jefferies JA, Webb MJ, Kvols LK. Different chemotherapeutic
+sensitivities and host factors affecting prognosis in advanced ovarian
+carcinoma versus minimal residual disease. Cancer Treat Rep. 1979
+Feb;63(2):241-7. PMID: 445503.

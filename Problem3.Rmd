@@ -2,7 +2,7 @@
 title: "Life_Table"
 author: "Zhuodiao Kuang"
 date: "`r Sys.Date()`"
-output: github_document
+output: pdf_document
 ---
 
 
@@ -122,5 +122,35 @@ For the group 2(rx = 2), the median survival time is not sure, because over half
 
 # Compare survival function estimations between K-M and F-H methods
 
+#### Nelson-Aalen(Fleming-Harrington) and K-M estimators
 
+* Survival function:
+
+$$ \hat{S_F}(t)=\left\{
+\begin{matrix}
+     1    &  t<t_1\\
+  \prod_{t_i \le t}exp[-\frac{d_i}{n_i}] & t \ge t_1
+\end{matrix}
+\right.
+$$
+
+$$ \hat{S_K}(t)=\left\{
+\begin{matrix}
+     1    &  t<t_1\\
+  \prod_{t_i \le t}[1-\frac{d_i}{n_i}] & t \ge t_1
+\end{matrix}
+\right.
+$$
+
+$$\because exp[-\frac{d_i}{n_i}] \ge1-\frac{d_i}{n_i}$$
+
+So, Fleming-Harrington estimator can always be larger than K-M estimator.
+
+# Descrbe the analyses and write conclusions
+
+
+
+# References
+
+Edmonson JH, Fleming TR, Decker DG, Malkasian GD, Jorgensen EO, Jefferies JA, Webb MJ, Kvols LK. Different chemotherapeutic sensitivities and host factors affecting prognosis in advanced ovarian carcinoma versus minimal residual disease. Cancer Treat Rep. 1979 Feb;63(2):241-7. PMID: 445503.
 

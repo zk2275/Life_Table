@@ -45,11 +45,38 @@ ovarian_rx2
 # Create life-table stratified by rx
 
 ```{r}
-print(lifetab2(Surv(futime, fustat == 0)~1,ovarian_rx1), digits = 2)
-print(lifetab2(Surv(futime, fustat == 0)~1,ovarian_rx2), digits = 2)
+lifet1<-lifetab2(Surv(futime, fustat == 1)~1,ovarian_rx1)
+lifet2<-lifetab2(Surv(futime, fustat == 1)~1,ovarian_rx2)
+print(lifet1, digits = 2)
+print(lifet2, digits = 2)
 ```
 
+
 # Plot hazard function by rx based on life-table estimate
+
+```{r}
+hazard1<-lifet1 |>
+  dplyr::select(tstart, tstop, hazard) |>
+  mutate(tmedian = (tstart+tstop)/2, rx ="1")
+
+hazard2<-lifet2 |>
+  dplyr::select(tstart, tstop, hazard) |>
+  mutate(tmedian = (tstart+tstop)/2, rx ="2")
+
+hazard <- rbind(hazard1,hazard2)
+```
+
+```{r}
+ggplot(hazard, aes(x = tmedian, y = hazard, color = rx)) +
+  geom_point()+
+  geom_line()
+
+
+```
+
+
+
+# Plot K-M survival function by rx
 
 ```{r}
 ovarian.survfit <-
@@ -68,3 +95,5 @@ cols <- lapply(c(2:6, 8:11) , function(x) res[x])
 tbl <- do.call(data.frame, cols)
 tbl
 ```
+
+

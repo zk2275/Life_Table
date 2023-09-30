@@ -1,9 +1,105 @@
 ---
-title: "Life_Table"
+title: "HW3"
 author: "Zhuodiao Kuang"
 date: "`r Sys.Date()`"
 output: pdf_document
 ---
+
+
+```{r setup, echo = FALSE, cache = FALSE, message = FALSE}
+rm(list = ls())
+library(knitr)
+## Global options
+opts_chunk$set(echo      = TRUE,
+	             cache     = TRUE,
+               prompt    = FALSE,
+               tidy      = FALSE,
+               comment   = NA,
+               message   = FALSE,
+               warning   = FALSE,
+               dpi       = 150,
+               fig.width = 4, 
+               fig.asp   = 5/7,
+               fig.align = "center")
+# attr.source = '.numberLines'
+```
+# Problem 1
+
+In the solution, I use the functions from the user's guide of SAS so that the survival function will be different from the theoretical function in PPT. For other functions, I will further explain in detail.
+
+#### Part 1
+
+|Interval	|Time Period	|Events	|Censor|	At risk at the beginning of the interval	|Average number at risk in the interval|
+|---|---|---|---|---|---|
+|1	|[0,4)	|2	|1	|20	|19.5|
+|2	|[4,8)	|1	|1	|17	|16.5|
+|3	|[8,12)	|0	|3	|15	|13.5|
+|4	|[12,16)	|1	|2 	|12	|11|
+
+The life-table estimates are computed by counting the numbers of censored and uncensored observations that fall into each of the time intervals $[t_{i-1},t_i),i=1,2,...,k+1$, where $t_0=0$ and $t_{k+1} = \infty$. Let $n_i$  be the number of units entering the interval $[t_{i-1},t_i)$, and let $d_i$ be the number of events occurring in the interval. Let $b_i = t_i - t_{i-1}$, and let $n_i^{'} = n_i - w_i/2$, where $w_i$ is the number of units censored in the interval. The **effective sample size** of the interval $[t_{i-1},t_i)$ is denoted by $n_i^{'}$. Let $t_{mi}$  denote the midpoint of $[t_{i-1},t_i)$.
+
+#### Part 2
+
+The conditional probability is an event in $[t_{i-1},t_i)$ is estimated by
+$$\hat{q_i} = \frac{d_i}{n_i^{'}}$$
+
+and its estimated standard error is
+
+|Interval|	Time Period	|Survival probability	|PDF|
+|---|---|---|---|
+|1	|[0,4)	|1|	0.025641|
+|2	|[4,8)|	0.897436	|0.013598|
+|3	|[8,12)|	0.843046	|0|
+|4	|[12,16)|	0.843046	|0.01916|
+
+
+|Interval	|Time Period	|Hazard|	se(S(t))|
+|---|---|---|---|
+|1|	[0,4)|	0.027027|	0|
+|2	|[4,8)|	0.015625|	0.0687|
+|3|	[8,12)	|0|	0.0833|
+|4|[12,16)|	0.02381	|0.0833|
+
+
+The conditional probability of an event in  is estimated by
+$$\hat{q_i} = \frac{d_i}{n_i^{'}}$$
+
+ 		 	 
+and its estimated standard error is
+
+$$\hat{\sigma}(\hat{q_i}) = \sqrt{\frac{\hat{q_i}\hat{p_i}}{n_i^{‘}}}$$
+ 		 	 
+where $\hat{p_i}=1-\hat{q_i}$.
+
+The estimate of the survival function at $t_i$ is
+
+$$ \hat{S}(t_i)=\left\{
+\begin{matrix}
+     1    &  i=0\\
+  \hat{S}(t_{i-1})p_{i-1} & i >0
+\end{matrix}
+\right.
+$$
+ 		
+ 	 
+and its estimated standard error is
+
+$$\hat{\sigma}(\hat{S}(t_i)) = \hat{S}(t_i)\sqrt{\Sigma_{j=1}^{i-1}\frac{\hat{q_j}}{n_j^{‘}\hat{p_j}}}$$
+ 		 	 
+The density function at $t_{mi}$ is estimated by
+
+$$\hat{f}(t_{mi}) = \frac{ \hat{S}(t_{i-1})\hat{q_{i-1}}}{b_i}$$
+
+The estimated hazard function at $t_{mi}$ is
+
+$$\hat{h}(t_{mi}) = \frac{2\hat{q_i}}{b_i(1+\hat{p_i})}$$
+
+
+
+
+# Problem 2
+
+![](P2.png)
 
 
 # Problem 3
@@ -20,23 +116,7 @@ library(biostat3)
 library(knitr)
 ```
 
-```{r setup, echo = FALSE, cache = FALSE, message = FALSE}
-rm(list = ls())
 
-## Global options
-opts_chunk$set(echo      = TRUE,
-	             cache     = TRUE,
-               prompt    = FALSE,
-               tidy      = FALSE,
-               comment   = NA,
-               message   = FALSE,
-               warning   = FALSE,
-               dpi       = 150,
-               fig.width = 4, 
-               fig.asp   = 5/7,
-               fig.align = "center")
-# attr.source = '.numberLines'
-```
 
 ## Ovarian Cancer:
 
